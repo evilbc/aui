@@ -1,0 +1,38 @@
+### Get all developers
+
+GET http://localhost:8082/api/developers
+
+### Get single developer
+
+GET http://localhost:8082/api/developers/8a991143-36ee-4d22-bdf6-c9dc301576ee
+
+### Get single developer, not existing
+
+GET http://localhost:8082/api/developers/ac4e2683-b2ba-4695-94d9-806a97fce71e
+
+### Delete developer
+
+DELETE http://localhost:8082/api/developers/8a991143-36ee-4d22-bdf6-c9dc301576ee
+
+### Create new developer
+
+PUT http://localhost:8082/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Test dev",
+  "country": "PL"
+}
+
+### Update developer
+
+PATCH http://localhost:8082/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Test dev-2",
+  "country": "PL-2"
+}
+
