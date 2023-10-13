@@ -1,0 +1,91 @@
+### Get all games
+
+GET http://localhost:8080/api/games
+
+### Get single game
+
+GET http://localhost:8080/api/games/a18e1f5a-0a55-4750-94d2-026f8e41b902
+
+### Get single game, not existing
+
+GET http://localhost:8080/api/games/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
+
+### Get developer games
+
+GET http://localhost:8080/api/developers/3d82fb9a-77a1-48a2-ae12-e78488a28114/games
+
+### Get developer games, empty
+
+GET http://localhost:8080/api/developers/61997695-cb9d-41b2-96c3-c28df27783e4/games
+
+### Getr developer games, not existing
+
+GET http://localhost:8080/api/developers/84dfc3e6-99bd-4535-9452-54ccd7edf08e/games
+
+### Create new game
+
+PUT http://localhost:8080/api/games/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Test game",
+  "price": 99.99,
+  "year": 2018,
+  "developerId": "3d82fb9a-77a1-48a2-ae12-e78488a28114"
+}
+
+### Update game
+
+PATCH http://localhost:8080/api/games/5f2e6575-d0be-4b83-b108-83bc35694b19
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Star Wars: The Old Republic",
+  "price": 29.99,
+  "year": 2006
+}
+
+### Delete game.
+
+DELETE http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
+
+### Get all developers
+
+GET http://localhost:8080/api/developers
+
+### Get single developer
+
+GET http://localhost:8080/api/developers/8a991143-36ee-4d22-bdf6-c9dc301576ee
+
+### Get single developer, not existing
+
+GET http://localhost:8080/api/developers/ac4e2683-b2ba-4695-94d9-806a97fce71e
+
+### Delete developer
+
+DELETE http://localhost:8080/api/developers/8a991143-36ee-4d22-bdf6-c9dc301576ee
+
+### Create new developer
+
+PUT http://localhost:8080/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Test dev",
+  "country": "PL"
+}
+
+### Update developer
+
+PATCH http://localhost:8080/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Test dev-2",
+  "country": "PL-2"
+}
+
