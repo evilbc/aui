@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let dev of developers">
+    {{dev.name}}
+    <button type="button"
+            (click)="delete(dev)">usuń
+    </button>
+  </li>
+</ul>
