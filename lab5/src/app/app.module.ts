@@ -4,11 +4,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {DeveloperListComponent} from './developer/developer-list/developer-list.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
+import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterLink, RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "../app-routing/app-routing.module";
-import { DeveloperAddComponent } from './developer/developer-add/developer-add.component';
+import {DeveloperAddComponent} from './developer/developer-add/developer-add.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import { DeveloperAddComponent } from './developer/developer-add/developer-add.c
         positionClass: "toast-top-right"
       }
     ),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

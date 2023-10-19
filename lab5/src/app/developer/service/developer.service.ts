@@ -1,6 +1,6 @@
-import {Injectable, NgModule} from '@angular/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {Observable, of, pipe} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable, of} from "rxjs";
 import {Developer, GetDevelopersDto} from "../model/developer-model";
 import {ToastrService} from "ngx-toastr";
 import {catchError, map, tap} from 'rxjs/operators';
@@ -26,6 +26,12 @@ export class DeveloperService {
     this.http.delete<void>(`/api/developers/${developer.id}`).pipe(
       tap(_ => this.toast.success("Usunięto")),
       catchError(this.handleError("Nie udało się usunąć developera"))
+    ).subscribe();
+  }
+
+  public create(developer: Developer): void {
+    this.http.put<void>(`/api/developers/${developer.id}`, developer).pipe(tap(_ => this.toast.success("Stworzono")),
+      catchError(this.handleError("Nie udało się stworzyć developera"))
     ).subscribe();
   }
 

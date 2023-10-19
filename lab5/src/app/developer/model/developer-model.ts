@@ -1,6 +1,7 @@
 export interface Developer {
   id: string;
-  name: string;
+  name?: string;
+  country?: string;
 }
 
 export interface GetDevelopersDto {
