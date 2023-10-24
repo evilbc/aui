@@ -1,9 +1,8 @@
-package lab1.developer.service.impl;
+package lab2.developer.service.impl;
 
-import lab1.developer.entity.Developer;
-import lab1.developer.repository.IDeveloperRepository;
-import lab1.developer.service.api.IDeveloperService;
-import lab1.game.entity.Game;
+import lab2.developer.entity.Developer;
+import lab2.developer.repository.IDeveloperRepository;
+import lab2.developer.service.api.IDeveloperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

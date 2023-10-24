@@ -1,4 +1,4 @@
-package lab1;
+package lab2;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Lab1 {
+public class Lab2 {
 	public static void main(String[] args) {
-		SpringApplication.run(Lab1.class, args);
+		SpringApplication.run(Lab2.class, args);
 	}
 
 	@Bean

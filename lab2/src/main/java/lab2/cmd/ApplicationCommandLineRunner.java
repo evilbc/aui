@@ -1,18 +1,15 @@
-package lab1.cmd;
+package lab2.cmd;
 
 import com.fasterxml.jackson.databind.ObjectWriter;
-import lab1.developer.entity.Developer;
-import lab1.developer.service.api.IDeveloperService;
-import lab1.game.entity.Game;
-import lab1.game.service.api.IGameService;
+import lab2.developer.entity.Developer;
+import lab2.developer.service.api.IDeveloperService;
+import lab2.game.entity.Game;
+import lab2.game.service.api.IGameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Component
@@ -24,22 +21,29 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Scanner scanner = new Scanner(System.in);
-		String command;
 		boolean shouldBreak = false;
 		System.out.println("Use help command to list all commands");
 		while (!shouldBreak) {
-			command = scanner.next();
+			String command = scanner.next();
 			switch (command) {
 			case "get_developers" -> System.out.println(objectWriter.writeValueAsString(developerService.findAll()));
 			case "get_games" -> System.out.println(objectWriter.writeValueAsString(gameService.findAll()));
 			case "get_developer_games" -> {
 				System.out.println("Developer id: ");
+				System.out.println(objectWriter.writeValueAsString(developerService.findAll()
+						.stream()
+						.map(Developer::getId)
+						.toList()));
 				UUID uuid = UUID.fromString(scanner.next());
 				System.out.println(objectWriter.writeValueAsString(gameService.findAllByDeveloper(uuid)
 						.orElse(Collections.emptyList())));
 			}
 			case "delete_game" -> {
 				System.out.println("Game id: ");
+				System.out.println(objectWriter.writeValueAsString(gameService.findAll()
+						.stream()
+						.map(Game::getId)
+						.toList()));
 				UUID id = UUID.fromString(scanner.next());
 				gameService.delete(id);
 			}
@@ -50,6 +54,10 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 				System.out.println("Price: ");
 				double price = scanner.nextDouble();
 				System.out.println("Developer id: ");
+				System.out.println(objectWriter.writeValueAsString(developerService.findAll()
+						.stream()
+						.map(Developer::getId)
+						.toList()));
 				UUID developerId = UUID.fromString(scanner.next());
 				Optional<Developer> developer = developerService.find(developerId);
 				if (developer.isEmpty()) {
@@ -75,6 +83,8 @@ public class ApplicationCommandLineRunner implements CommandLineRunner {
 				System.out.println("quit - shut down the app");
 			}
 			case "quit" -> shouldBreak = true;
+			default -> System.out.println(
+					"Command not understood: " + command + "\nTo see possible commands type \"help\"");
 			}
 		}
 	}
