@@ -1,4 +1,4 @@
-package lab1.game.dto;
+package lab2.game.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

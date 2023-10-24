@@ -1,7 +1,7 @@
-package lab1.game.entity;
+package lab2.game.entity;
 
 import jakarta.persistence.*;
-import lab1.developer.entity.Developer;
+import lab2.developer.entity.Developer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class Game implements Serializable {
 	@Column(nullable = false)
 	private double price;
 	@ManyToOne
-	@JoinColumn(name = "developer", nullable = false)
+	@JoinColumn(name = "developer")
 	private Developer developer;
 
 }

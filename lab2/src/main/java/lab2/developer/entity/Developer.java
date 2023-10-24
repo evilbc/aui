@@ -1,7 +1,8 @@
-package lab1.developer.entity;
+package lab2.developer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lab1.game.entity.Game;
+import lab2.game.entity.Game;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,20 +19,12 @@ import java.util.UUID;
 public class Developer implements Serializable {
 	@Id
 	private UUID id;
-	@Column(name = "developer_name", nullable = false)
+	@Column(nullable = false)
 	private String name;
+	@JsonIgnore
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	@Builder.Default
 	@OneToMany(mappedBy = "developer", fetch = FetchType.LAZY)
-	private transient List<Game> games = new ArrayList<>();
+	private List<Game> games;
 
-	@ToString.Include
-	private int gamesCount() {
-		return games == null ? 0 : games.size();
-	}
-
-	public void addGame(Game game) {
-		games.add(game);
-	}
 }

@@ -1,7 +1,6 @@
-package lab1.developer.service.api;
+package lab2.developer.service.api;
 
-import lab1.developer.entity.Developer;
-import lab1.game.entity.Game;
+import lab2.developer.entity.Developer;
 
 import java.util.List;
 import java.util.Optional;

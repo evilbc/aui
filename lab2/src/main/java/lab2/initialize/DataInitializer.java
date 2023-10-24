@@ -1,9 +1,9 @@
-package lab1.initialize;
+package lab2.initialize;
 
-import lab1.developer.entity.Developer;
-import lab1.developer.service.api.IDeveloperService;
-import lab1.game.entity.Game;
-import lab1.game.service.api.IGameService;
+import lab2.developer.entity.Developer;
+import lab2.developer.service.api.IDeveloperService;
+import lab2.game.entity.Game;
+import lab2.game.service.api.IGameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
