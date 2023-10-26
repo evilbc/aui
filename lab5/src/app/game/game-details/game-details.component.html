@@ -1,0 +1,14 @@
+<h1>{{game?.name}}</h1>
+<div>
+    Id: {{game?.id}}
+</div>
+<div>
+    Cena: {{game?.price}}
+</div>
+<div *ngIf="game?.year">
+    Rok wydania: {{game?.year}}
+</div>
+<div>
+    Deweloper: {{developer?.name}}
+</div>
+

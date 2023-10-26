@@ -1,0 +1,23 @@
+<h1 *ngIf="isAddMode">Stwórz grę</h1>
+<h1 *ngIf="!isAddMode">Edytuj grę</h1>
+<form (ngSubmit)="onSubmit()" #gameForm="ngForm">
+    <div class="form-group">
+        <label for="uuid">ID</label>
+        <input type="text" class="form-control" id="uuid" name="uuid" required disabled [(ngModel)]="game.id">
+    </div>
+    <div class="form-group">
+        <label for="name">Nazwa</label>
+        <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="game.name">
+    </div>
+    <div class="form-group">
+        <label for="price">Cena</label>
+        <input type="number" class="form-control" id="price" name="price"
+               [(ngModel)]="game.price">
+    </div>
+    <div class="form-group">
+        <label for="year">Rok wydania</label>
+        <input type="number" class="form-control" id="year" name="year"
+               [(ngModel)]="game.year">
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!gameForm.form.valid">Zapisz</button>
+</form>
