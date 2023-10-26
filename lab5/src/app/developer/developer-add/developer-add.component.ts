@@ -2,38 +2,43 @@ import {Component, OnInit} from '@angular/core';
 import {DeveloperService} from "../service/developer.service";
 import {Developer} from "../model/developer-model";
 import * as uuid from "uuid";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from '@angular/common'
 
 @Component({
-  selector: 'app-developer-add',
-  templateUrl: './developer-add.component.html',
-  styleUrls: ['./developer-add.component.css']
+    selector: 'app-developer-add',
+    templateUrl: './developer-add.component.html',
+    styleUrls: ['./developer-add.component.css']
 })
 export class DeveloperAddComponent implements OnInit {
-  developer: Developer = new FormDeveloper(uuid.v4());
+    developer: Developer = {id: uuid.v4(), name: '', country: ''};
+    id: string | null = null;
 
-  constructor(private developerService: DeveloperService) {
-  }
+    constructor(private developerService: DeveloperService, private route: ActivatedRoute, private location: Location) {
+    }
 
-  ngOnInit(): void {
-    this.refresh()
-  }
+    ngOnInit(): void {
+        this.id = this.route.snapshot.paramMap.get('id');
+        this.refresh()
+    }
 
-  onSubmit() {
-    this.create(this.developer);
-    this.refresh();
-  }
+    onSubmit() {
+        if (!this.id) {
+            this.developerService.create(this.developer).subscribe(_ => this.refresh());
+        } else {
+            this.developerService.update(this.developer).subscribe(_ => this.location.back());
+        }
+    }
 
-  create(developer: Developer): void {
-    this.developerService.create(developer);
-  }
+    refresh(): void {
+        if (!this.id) {
+            this.developer = {id: uuid.v4(), name: '', country: ''};
+        } else {
+            this.developerService.get(this.id).subscribe(d => this.developer = d);
+        }
+    }
 
-  refresh(): void {
-    this.developer = new FormDeveloper(uuid.v4());
-  }
-}
-
-class FormDeveloper implements Developer {
-
-  constructor(public id: string, public name?: string, public country?: string) {
-  }
+    isAddMode(): boolean {
+        return !this.id;
+    }
 }

@@ -1,0 +1,20 @@
+<h1>{{developer?.name}}</h1>
+<div>
+    Id: {{developer?.id}}
+</div>
+<div>
+    Kraj: {{developer?.country}}
+</div>
+<div>
+    <a routerLink="games/add">Dodaj grę</a>
+</div>
+<ul>
+    <li *ngFor="let game of games">
+        {{game.name}}
+        <button type="button"
+                (click)="deleteGame(game)">usuń
+        </button>
+        <a routerLink="games/{{game.id}}/edit">edytuj</a>&nbsp;
+        <a routerLink="games/{{game.id}}">szczegóły</a>
+    </li>
+</ul>

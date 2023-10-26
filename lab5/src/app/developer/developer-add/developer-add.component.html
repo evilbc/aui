@@ -1,16 +1,18 @@
+<h1 *ngIf="isAddMode">Stwórz dewelopera</h1>
+<h1 *ngIf="!isAddMode">Edytuj dewelopera</h1>
 <form (ngSubmit)="onSubmit()" #developerForm="ngForm">
-  <div class="form-group">
+  <div class="form-group col-5">
     <label for="uuid">ID</label>
     <input type="text" class="form-control" id="uuid" name="uuid" required disabled [(ngModel)]="developer.id">
   </div>
-  <div class="form-group">
-    <label for="name">Name</label>
+  <div class="form-group col-5">
+    <label for="name">Nazwa</label>
     <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="developer.name">
   </div>
-  <div class="form-group">
-    <label for="country">Country</label>
+  <div class="form-group col-5">
+    <label for="country">Kraj</label>
     <input type="text" class="form-control" id="country" name="country"
            [(ngModel)]="developer.country">
   </div>
-  <button type="submit" class="btn btn-success" [disabled]="!developerForm.form.valid">Dodaj</button>
+  <button type="submit" class="btn btn-success" [disabled]="!developerForm.form.valid">Zapisz</button>
 </form>

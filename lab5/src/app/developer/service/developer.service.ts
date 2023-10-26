@@ -19,20 +19,35 @@ export class DeveloperService {
   public getDevelopers(): Observable<Developer[]> {
     return this.http.get<GetDevelopersDto>('/api/developers').pipe(
       map(dto => dto?.developers ?? []),
-      catchError(this.handleError("Nie udało się pobrać listy developerów", [])));
+      catchError(this.handleError("Nie udało się pobrać listy deweloperów", [])));
   }
 
-  public delete(developer: Developer): void {
-    this.http.delete<void>(`/api/developers/${developer.id}`).pipe(
+  public get(id: string): Observable<Developer> {
+    return this.http.get<Developer>(`/api/developers/${id}`).pipe(
+      catchError(this.handleError('Nie udało się pobrać danych dewelopera', {id: id, name: '', country: ''})))
+      ;
+  }
+
+  public delete(developer: Developer): Observable<Developer> {
+    return this.http.delete<void>(`/api/developers/${developer.id}`).pipe(
+      map(_ => developer),
       tap(_ => this.toast.success("Usunięto")),
-      catchError(this.handleError("Nie udało się usunąć developera"))
-    ).subscribe();
+      catchError(this.handleError("Nie udało się usunąć dewelopera", developer))
+    );
   }
 
-  public create(developer: Developer): void {
-    this.http.put<void>(`/api/developers/${developer.id}`, developer).pipe(tap(_ => this.toast.success("Stworzono")),
-      catchError(this.handleError("Nie udało się stworzyć developera"))
-    ).subscribe();
+  public create(developer: Developer): Observable<Developer> {
+    return this.http.put<void>(`/api/developers/${developer.id}`, developer).pipe(
+      map(_ => developer), tap(_ => this.toast.success("Stworzono dewelopera")),
+      catchError(this.handleError("Nie udało się stworzyć dewelopera", developer))
+    );
+  }
+
+  public update(developer: Developer): Observable<Developer> {
+    return this.http.patch<void>(`/api/developers/${developer.id}`, developer).pipe(
+      map(_ => developer), tap(_ => this.toast.success("Zaktualizowano dewelopera")),
+      catchError(this.handleError("Nie udało się zaktualizować dewelopera", developer))
+    );
   }
 
   private handleError<T>(toastTitle: string, result?: T) {
