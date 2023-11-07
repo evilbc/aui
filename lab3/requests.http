@@ -18,7 +18,7 @@ GET http://localhost:8080/api/developers/3d82fb9a-77a1-48a2-ae12-e78488a28114/ga
 
 GET http://localhost:8080/api/developers/61997695-cb9d-41b2-96c3-c28df27783e4/games
 
-### Getr developer games, not existing
+### Get developer games, not existing
 
 GET http://localhost:8080/api/developers/84dfc3e6-99bd-4535-9452-54ccd7edf08e/games
 
@@ -26,7 +26,6 @@ GET http://localhost:8080/api/developers/84dfc3e6-99bd-4535-9452-54ccd7edf08e/ga
 
 PUT http://localhost:8080/api/games/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
 Content-Type: application/json
-Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 {
   "name": "Test game",
@@ -39,7 +38,6 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 PATCH http://localhost:8080/api/games/5f2e6575-d0be-4b83-b108-83bc35694b19
 Content-Type: application/json
-Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 {
   "name": "Star Wars: The Old Republic",
@@ -49,7 +47,7 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 ### Delete game.
 
-DELETE http://localhost:8080/api/characters/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
+DELETE http://localhost:8080/api/games/3c6f1eb1-8069-44ab-988f-d7fed2b65d87
 
 ### Get all developers
 
@@ -71,7 +69,6 @@ DELETE http://localhost:8080/api/developers/8a991143-36ee-4d22-bdf6-c9dc301576ee
 
 PUT http://localhost:8080/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
 Content-Type: application/json
-Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 {
   "name": "Test dev",
@@ -82,7 +79,6 @@ Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 PATCH http://localhost:8080/api/developers/4891a1ff-03fe-49c3-9faf-47033b1a6873
 Content-Type: application/json
-Authorization: Basic a2V2aW46dXNlcnVzZXI=
 
 {
   "name": "Test dev-2",
