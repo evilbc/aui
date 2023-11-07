@@ -24,7 +24,7 @@ public class DataInitializer implements InitializingBean {
 		Developer squareEnix = Developer.builder()
 				.id(UUID.fromString("8a991143-36ee-4d22-bdf6-c9dc301576ee"))
 				.name("Square Enix")
-				.country("US")
+				.country("JP")
 				.build();
 		Developer bioware = Developer.builder()
 				.id(UUID.fromString("3d82fb9a-77a1-48a2-ae12-e78488a28114"))

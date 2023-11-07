@@ -22,7 +22,7 @@ export class DeveloperAddComponent implements OnInit {
         this.refresh()
     }
 
-    onSubmit() {
+    onSubmit(): void {
         if (!this.id) {
             this.developerService.create(this.developer).subscribe(_ => this.refresh());
         } else {
