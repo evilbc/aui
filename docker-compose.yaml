@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  game:
+    image: aui-game
+    restart: always
+
+  developer:
+    image: aui-developer
+    restart: always
+    environment:
+      LAB4_GAME_URL: "http://game:8080"
+
+  gateway:
+    image: aui-gateway
+    restart: always
+    environment:
+      LAB4_GAME_URL: "http://game:8080"
+      LAB4_DEVELOPER_URL: "http://developer:8080"
+      LAB4_GATEWAY_HOST: "gateway:8080"
+
+  angular:
+    image: aui-angular
+    restart: always
+    environment:
+      API_URL: http://gateway:8080/api
+    ports:
+      - "8090:80"
