@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
 
+## Docker
+ng build
+
+docker build -t aui-angular .
+
+docker run -p 8090:80 aui-angular
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

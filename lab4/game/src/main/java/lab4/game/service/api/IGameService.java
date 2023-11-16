@@ -20,5 +20,7 @@ public interface IGameService {
 
 	void delete(UUID id);
 
+	void deleteAll();
+
 	Optional<List<Game>> findAllByDeveloper(UUID developerId);
 }

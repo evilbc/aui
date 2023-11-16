@@ -11,4 +11,6 @@ public interface IDeveloperService {
 	void create(Developer developer);
 
 	void delete(UUID id);
+
+	void deleteAll();
 }

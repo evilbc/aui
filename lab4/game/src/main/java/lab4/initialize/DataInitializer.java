@@ -7,6 +7,7 @@ import lab4.game.service.api.IGameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -19,8 +20,18 @@ public class DataInitializer implements InitializingBean {
 	private final IDeveloperService developerService;
 	private final IGameService gameService;
 
+	@Value("${lab4.db.restart}")
+	private boolean restart;
+
 	@Override
 	public void afterPropertiesSet() {
+		if (!gameService.findAll().isEmpty() && !restart) {
+			return;
+		} else if (restart) {
+			developerService.deleteAll();
+			gameService.deleteAll();
+		}
+
 		Developer squareEnix = Developer.builder()
 				.id(UUID.fromString("8a991143-36ee-4d22-bdf6-c9dc301576ee"))
 				.build();
