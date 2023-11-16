@@ -49,6 +49,11 @@ public class GameDefaultService implements IGameService {
 	}
 
 	@Override
+	public void deleteAll() {
+		repository.deleteAll();
+	}
+
+	@Override
 	public Optional<List<Game>> findAllByDeveloper(UUID developerId) {
 		return developerRepository.findById(developerId)
 				.map(this::findAll);

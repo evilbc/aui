@@ -43,4 +43,9 @@ public class DeveloperDefaultService implements IDeveloperService {
 		repository.deleteById(id);
 		eventRepository.delete(id);
 	}
+
+	@Override
+	public void deleteAll() {
+		findAll().forEach(dev -> delete(dev.getId()));
+	}
 }

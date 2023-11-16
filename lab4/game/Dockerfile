@@ -15,6 +15,8 @@ ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 ENV SPRING_H2_CONSOLE_enabled=true
 
+ENV LAB4_DB_RESTART=false
+
 EXPOSE 8080
 
 COPY target/lab4.game-${VERSION}.jar /opt/lab4-game/lab4-game.jar

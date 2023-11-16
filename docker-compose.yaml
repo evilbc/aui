@@ -1,19 +1,73 @@
 version: '3'
 
 services:
+  db_game:
+    image: mariadb:10.10
+    restart: always
+    environment:
+      # MARIADB_ROOT_PASSWORD: "admin"
+      # MARIADB_DATABASE: "game"
+      # MARIADB_ROOT_HOST: '%'
+      # MARIADB_USER: "user2"
+      # MARIADB_PASSWORD: "admin"
+      - "MYSQL_ROOT_PASSWORD=admin"
+      - "MYSQL_DATABASE=game"
+      - "MYSQL_ROOT_HOST=%"
+    volumes:
+      - db_game_data:/var/lib/mysql
+
+  db_developer:
+    image: mariadb:10.10
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: "admin"
+      MARIADB_DATABASE: "developer"
+      MARIADB_ROOT_HOST: '%'
+      MARIADB_USER: "user"
+      MARIADB_PASSWORD: "admin"
+    volumes:
+      - db_developer_data:/var/lib/mysql
+
   game:
     image: aui-game
     restart: always
+    depends_on:
+      - db_game
+    environment:
+      LAB4_DB_RESTART: "false"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db_game/game"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.mariadb.jdbc.Driver"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "admin"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MariaDBDialect"
+      SPRING_JPA_GENERATE_DDL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+
 
   developer:
     image: aui-developer
     restart: always
+    depends_on:
+      - game
+      - db_developer
     environment:
       LAB4_GAME_URL: "http://game:8080"
+      LAB4_DB_RESTART: "false"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db_developer/developer"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.mariadb.jdbc.Driver"
+      SPRING_DATASOURCE_USERNAME: "user"
+      SPRING_DATASOURCE_PASSWORD: "admin"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MariaDBDialect"
+      SPRING_JPA_GENERATE_DDL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+
 
   gateway:
     image: aui-gateway
     restart: always
+    depends_on:
+      - game
+      - developer
     environment:
       LAB4_GAME_URL: "http://game:8080"
       LAB4_DEVELOPER_URL: "http://developer:8080"
@@ -22,7 +76,13 @@ services:
   angular:
     image: aui-angular
     restart: always
+    depends_on:
+      - gateway
     environment:
       API_URL: http://gateway:8080/api
     ports:
       - "8090:80"
+volumes:
+  db_game_data:
+  db_developer_data:
+

@@ -28,4 +28,9 @@ public class DeveloperDefaultService implements IDeveloperService {
 	public void delete(UUID id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public void deleteAll() {
+		repository.deleteAll();
+	}
 }

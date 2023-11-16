@@ -17,6 +17,8 @@ ENV SPRING_H2_CONSOLE_enabled=true
 
 ENV LAB4_GAME_URL=http://localhost:8081
 
+ENV LAB4_DB_RESTART=false
+
 EXPOSE 8080
 
 COPY target/lab4.developer-${VERSION}.jar /opt/lab4-developer/lab4-developer.jar
