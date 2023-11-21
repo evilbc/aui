@@ -6,7 +6,9 @@ import lab4.game.entity.Game;
 import lab4.game.repository.IGameRepository;
 import lab4.game.service.api.IGameService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +37,9 @@ public class GameDefaultService implements IGameService {
 
 	@Override
 	public void create(Game game) {
+		if (developerRepository.findById(game.getDeveloper().getId()).isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Developer not found");
+		}
 		repository.save(game);
 	}
 
