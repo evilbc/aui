@@ -8,9 +8,9 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Lab4DeveloperGateway {
+public class Lab4Gateway {
 	public static void main(String[] args) {
-		SpringApplication.run(Lab4DeveloperGateway.class, args);
+		SpringApplication.run(Lab4Gateway.class, args);
 	}
 
 	@Bean
