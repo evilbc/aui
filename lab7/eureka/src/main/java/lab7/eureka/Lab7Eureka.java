@@ -1,14 +1,14 @@
-package lab4;
+package lab7.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-public class Lab4Game {
+@EnableEurekaServer
+public class Lab7Eureka {
 	public static void main(String[] args) {
-		SpringApplication.run(lab4.Lab4Game.class, args);
+		SpringApplication.run(Lab7Eureka.class, args);
 	}
 
 }
