@@ -17,6 +17,9 @@ ENV SPRING_H2_CONSOLE_enabled=true
 
 ENV LAB4_DB_RESTART=false
 
+ENV EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8085/eureka
+ENV EUREKA_INSTANCE_INSTANCE_ID=1
+
 EXPOSE 8080
 
 COPY target/lab4.game-${VERSION}.jar /opt/lab4-game/lab4-game.jar
