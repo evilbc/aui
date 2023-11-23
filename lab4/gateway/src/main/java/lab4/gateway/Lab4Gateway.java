@@ -33,45 +33,12 @@ public class Lab4Gateway {
 				.route("developers", route -> route.host(host)
 						.and()
 						.path("/api/developers/{uuid}", "/api/developers")
-						.uri("ds://developer"))
+						.uri("lb://developer"))
 				.route("games", route -> route.host(host)
 						.and()
 						.path("/api/games", "/api/games/**", "/api/developers/{uuid}/games",
 								"/api/developers/{uuid}/games/**")
-						.uri("ds://game"))
+						.uri("lb://game"))
 				.build();
 	}
-
-	@Bean
-	public GlobalFilter discoveryFilter(DiscoveryClient discoveryClient) {
-		return new GlobalFilter() {
-			@Override
-			@SneakyThrows
-			public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-				URI uri = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR);
-				if (uri != null && "ds".equals(uri.getScheme())) {
-					if (log.isInfoEnabled())
-						log.info("Uri host: {}", uri.getHost());
-					ServiceInstance instance = discoveryClient.getInstances(uri.getHost())
-							.stream()
-							.findFirst()
-							.orElseThrow();
-					if (log.isInfoEnabled())
-						log.info("Instance host: {}", instance.getHost());
-					URI newUri = new URI(instance.getScheme(),   // Updated scheme
-							uri.getUserInfo(),      // Keep the original user info
-							instance.getHost(),     // Updated host
-							instance.getPort(),     // Updated port
-							uri.getPath(),          // Keep the original path
-							uri.getQuery(),         // Keep the original query
-							uri.getFragment()       // Keep the original fragment
-					);
-					exchange.getAttributes()
-							.put(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR, newUri);
-				}
-				return chain.filter(exchange);
-			}
-		};
-	}
-
 }
