@@ -42,8 +42,14 @@ public class DataInitializer implements InitializingBean {
 				.country("US")
 				.build();
 
-		for (Developer dev : Arrays.asList(squareEnix, bioware, bethesda)) {
-			developerService.create(dev);
+		try {
+			for (Developer dev : Arrays.asList(squareEnix, bioware, bethesda)) {
+				developerService.create(dev);
+			}
+		} catch (Exception e) {
+			log.error("Can't initialize developers", e);
+			developerService.deleteAll();
+			throw e;
 		}
 
 	}

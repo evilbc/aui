@@ -76,6 +76,8 @@ services:
     depends_on:
       - db_developer
       - eureka
+      - game-1
+      - game-2
     environment:
       LAB4_DB_RESTART: "false"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
