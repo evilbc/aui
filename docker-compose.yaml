@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  configuration:
+    image: aui-configuration
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
+    volumes:
+      - "./configuration:/var/lab7-configuration/configuration"
+
   eureka:
     image: aui-eureka
     restart: always
@@ -37,73 +45,35 @@ services:
   game-1:
     image: aui-game
     restart: always
-    depends_on:
-      - db_game
-      - eureka
     environment:
-      LAB4_DB_RESTART: "false"
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
       EUREKA_INSTANCE_INSTANCE_ID: "1"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db_game/game"
-      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.mariadb.jdbc.Driver"
-      SPRING_DATASOURCE_USERNAME: "root"
-      SPRING_DATASOURCE_PASSWORD: "admin"
-      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MariaDBDialect"
-      SPRING_JPA_GENERATE_DDL: "true"
-      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_CONFIG_IMPORT: "configserver:http://configuration:8080"
+
 
   game-2:
     image: aui-game
     restart: always
-    depends_on:
-      - db_game
-      - eureka
     environment:
-      LAB4_DB_RESTART: "false"
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
       EUREKA_INSTANCE_INSTANCE_ID: "2"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db_game/game"
-      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.mariadb.jdbc.Driver"
-      SPRING_DATASOURCE_USERNAME: "root"
-      SPRING_DATASOURCE_PASSWORD: "admin"
-      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MariaDBDialect"
-      SPRING_JPA_GENERATE_DDL: "true"
-      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_CONFIG_IMPORT: "configserver:http://configuration:8080"
 
   developer:
     image: aui-developer
     restart: always
-    depends_on:
-      - db_developer
-      - eureka
-      - game-1
-      - game-2
     environment:
-      LAB4_DB_RESTART: "false"
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db_developer/developer"
-      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.mariadb.jdbc.Driver"
-      SPRING_DATASOURCE_USERNAME: "user"
-      SPRING_DATASOURCE_PASSWORD: "admin"
-      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MariaDBDialect"
-      SPRING_JPA_GENERATE_DDL: "true"
-      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_CONFIG_IMPORT: "configserver:http://configuration:8080"
 
 
   gateway:
     image: aui-gateway
     restart: always
-    depends_on:
-      - eureka
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8080/eureka"
+      SPRING_CONFIG_IMPORT: "configserver:http://configuration:8080"
       LAB4_GATEWAY_HOST: "gateway:8080"
 
   angular:
     image: aui-angular
     restart: always
-    depends_on:
-      - gateway
     environment:
       API_URL: http://gateway:8080/api
     ports:
