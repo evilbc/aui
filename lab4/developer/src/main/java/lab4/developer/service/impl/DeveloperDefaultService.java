@@ -6,6 +6,7 @@ import lab4.developer.repository.IDeveloperRepository;
 import lab4.developer.service.api.IDeveloperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class DeveloperDefaultService implements IDeveloperService {
 	}
 
 	@Override
+	@Transactional
 	public void create(Developer developer) {
 		repository.save(developer);
 		eventRepository.create(developer.getId());
@@ -39,6 +41,7 @@ public class DeveloperDefaultService implements IDeveloperService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(UUID id) {
 		repository.deleteById(id);
 		eventRepository.delete(id);
