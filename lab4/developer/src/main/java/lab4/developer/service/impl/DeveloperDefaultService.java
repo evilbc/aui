@@ -47,6 +47,7 @@ public class DeveloperDefaultService implements IDeveloperService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(UUID id) {
 		log.info("Deleting developer with id {}", id);
 		repository.deleteById(id);
