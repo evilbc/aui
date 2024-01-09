@@ -19,9 +19,11 @@ public class DataInitializer implements InitializingBean {
 
 	@Value("${lab4.db.restart}")
 	private boolean restart;
+
 	@Override
 	public void afterPropertiesSet() {
-		if (!developerService.findAll().isEmpty() && !restart) {
+		if (!developerService.findAll()
+				.isEmpty() && !restart) {
 			return;
 		} else if (restart) {
 			developerService.deleteAll();
@@ -45,6 +47,5 @@ public class DataInitializer implements InitializingBean {
 		for (Developer dev : Arrays.asList(squareEnix, bioware, bethesda)) {
 			developerService.create(dev);
 		}
-
 	}
 }
